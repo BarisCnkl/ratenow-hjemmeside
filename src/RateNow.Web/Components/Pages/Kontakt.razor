@@ -195,7 +195,7 @@
         }
         catch (Exception ex)
         {
-            Logger.LogError(ex, "Kunne ikke gemme henvendelse fra {Company}", Model.Company);
+            Logger.LogError(ex, "Kunne ikke sende henvendelse fra {Company}", Model.Company);
             _failed = true;
         }
     }

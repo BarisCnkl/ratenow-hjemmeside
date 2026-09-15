@@ -10,9 +10,13 @@ builder.Services.AddRazorComponents()
 builder.Services.Configure<SiteSettings>(
     builder.Configuration.GetSection(SiteSettings.SectionName));
 
-// Henvendelser fra kontaktformularen. Vil du have dem på mail i stedet,
-// så skriv en ny klasse der implementerer IContactSubmissionSink og skift linjen her.
-builder.Services.AddSingleton<IContactSubmissionSink, FileContactSubmissionSink>();
+// Mailserveren fra appsettings.json -> sektionen "Smtp". Adgangskoden sættes på serveren.
+builder.Services.Configure<SmtpSettings>(
+    builder.Configuration.GetSection(SmtpSettings.SectionName));
+
+// Henvendelser fra kontaktformularen gemmes som fil og sendes på mail.
+builder.Services.AddSingleton<FileContactSubmissionSink>();
+builder.Services.AddSingleton<IContactSubmissionSink, EmailContactSubmissionSink>();
 
 var app = builder.Build();
 

@@ -72,16 +72,19 @@ rigtige produkter vises med logo, så brug fotos.
 
 ## Kontaktformularen
 
-Formularen på `/kontakt` gemmer hver henvendelse som en JSON-fil i
-`src/RateNow.Web/App_Data/henvendelser/`. Det betyder, at den virker fra dag ét,
-også før der er sat en mailserver op.
+Hver henvendelse fra `/kontakt` bliver:
 
-Vil du have henvendelserne på e-mail i stedet:
+1. gemt som en JSON-fil (lokalt i `src/RateNow.Web/App_Data/henvendelser/`, på Azure i
+   `/home/data/henvendelser`), så intet går tabt, og
+2. sendt på mail til adressen i `appsettings.json` → `Smtp:To`. Trykker du *svar* på
+   mailen, går svaret direkte til kunden.
 
-1. Lav en ny klasse, der implementerer `IContactSubmissionSink`.
-2. Skift linjen i `Program.cs`, hvor `FileContactSubmissionSink` registreres.
+Mailen sendes via Gmail (`smtp.gmail.com`). Adgangskoden står **ikke** i koden — den er en
+Gmail-app-adgangskode, der ligger på serveren som indstillingen `Smtp__Password`. Mangler den,
+gemmes henvendelserne kun som fil. Kan mailen ikke sendes, får kunden besked om at skrive
+direkte til jeres e-mail.
 
-Resten af siden skal ikke ændres.
+Koden ligger i `Services/EmailContactSubmissionSink.cs`.
 
 Formularen har en skjult honeypot-felt mod robotter og kræver et samtykke-flueben,
 inden den kan sendes.
