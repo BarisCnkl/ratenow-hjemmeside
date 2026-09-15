@@ -1,0 +1,23 @@
+# Den gratis Azure-plan lægger siden i dvale, når ingen har besøgt den et stykke tid.
+# Denne workflow besøger siden hvert 10. minut, så den er vågen, når en kunde kommer forbi.
+# GitHub kan forsinke planlagte kørsler lidt, så det er ikke en garanti.
+name: Hold siden vågen
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+permissions: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Besøg forsiden
+        run: |
+          curl --silent --show-error --fail --output /dev/null \
+            --max-time 120 --retry 3 --retry-delay 10 \
+            --write-out "HTTP %{http_code} på %{time_total}s\n" \
+            https://ratenow-hjemmeside.azurewebsites.net/

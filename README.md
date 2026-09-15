@@ -93,6 +93,11 @@ der pushes til `main` (se `.github/workflows/deploy.yml`). Den kører på Azure 
 (ressourcegruppe `ratenow-rg`, Sweden Central). Henvendelser fra kontaktformularen gemmes
 dér i `/home/data/henvendelser`.
 
+Den gratis plan (F1) lægger siden i dvale, når den ikke bliver brugt. Derfor besøger
+`.github/workflows/keep-awake.yml` siden hvert 10. minut. GitHub slår planlagte
+workflows fra, hvis der ikke er sket noget i repoet i 60 dage — så tjek fanen
+**Actions** en gang imellem.
+
 Vil du bygge en udgave selv:
 
 ```bash
