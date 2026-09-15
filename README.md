@@ -88,6 +88,13 @@ inden den kan sendes.
 
 ## Udgivelse
 
+Siden udgives automatisk til <https://ratenow-hjemmeside.azurewebsites.net>, hver gang
+der pushes til `main` (se `.github/workflows/deploy.yml`). Den kører på Azure App Service
+(ressourcegruppe `ratenow-rg`, Sweden Central). Henvendelser fra kontaktformularen gemmes
+dér i `/home/data/henvendelser`.
+
+Vil du bygge en udgave selv:
+
 ```bash
 dotnet publish src/RateNow.Web -c Release -o publish
 ```
