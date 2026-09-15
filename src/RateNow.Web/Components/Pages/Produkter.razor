@@ -1,0 +1,86 @@
+@page "/produkter"
+
+<PageMeta Title="Produkter"
+          Description="NFC-standere, NFC-kort og NFC-klistermærker til Google- og Trustpilot-anmeldelser. Se hvad der passer til jeres forretning." />
+
+<PageHead Eyebrow="Produkter"
+          Title="Fire måder at spørge på"
+          Lead="Teknikken er den samme i dem alle. Forskellen er, hvor produktet skal være, og hvem der skal række det frem." />
+
+<section class="section">
+    <div class="container">
+        <div class="grid grid--2">
+            @foreach (var product in SiteContent.Products)
+            {
+                <div id="@product.Slug">
+                    <ProductCard Item="product" />
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Eyebrow="Hvad er med i prisen"
+                     Title="Der er ikke noget, der kommer oveni bagefter"
+                     Lead="Prisen dækker produktet, opsætningen og den hjælp, du har brug for undervejs." />
+
+        <div class="grid grid--3">
+            <div class="card">
+                <div class="icon-tile"><Icon Name="tap" Size="26" /></div>
+                <h3>Opsætning</h3>
+                <p class="card__body">
+                    Vi koder produktet med jeres anmeldelseslink, inden det bliver sendt.
+                    Har du ikke linket, finder vi det for dig ud fra virksomhedens navn og adresse.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon-tile"><Icon Name="truck" Size="26" /></div>
+                <h3>Levering, som I vil have den</h3>
+                <p class="card__body">
+                    Vi sender med fragt, eller vi kommer selv forbi med produktet og sætter det op.
+                    Standardvarer er typisk klar inden for få hverdage. Skal der trykkes jeres eget
+                    design, aftaler vi en dato, når vi har set materialet.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon-tile"><Icon Name="help" Size="26" /></div>
+                <h3>Hjælp bagefter</h3>
+                <p class="card__body">
+                    Skal linket skiftes, eller driller noget? Så skriv til os. Det er ikke
+                    en supportaftale, du skal købe — det er bare sådan, vi gør det.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <SectionHead Eyebrow="Ikke sikker på hvad I skal vælge?"
+                     Title="Her er den korte vejledning" />
+
+        <div class="grid grid--2">
+            @foreach (var product in SiteContent.Products)
+            {
+                <div class="card">
+                    <h3>@product.Name</h3>
+                    <p class="card__tagline">Passer til</p>
+                    <p class="card__body">@product.BestFor</p>
+                </div>
+            }
+        </div>
+
+        <p class="lead" style="margin-top:32px">
+            Er I stadig i tvivl, så skriv et par linjer om jeres forretning.
+            Vi svarer med et forslag — også hvis forslaget er, at I ikke behøver købe noget endnu.
+            Og vil I hellere tage den ansigt til ansigt, kommer vi ud og sætter os ned med jer.
+        </p>
+    </div>
+</section>
+
+<CtaBand Title="Skal vi finde det rigtige sammen?"
+         Body="Fortæl os hvor kunderne står, når de er færdige hos jer, så peger vi på det produkt, der giver mening."
+         PrimaryLabel="Spørg os til råds"
+         ShowSecondary="false" />

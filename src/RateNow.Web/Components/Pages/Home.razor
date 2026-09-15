@@ -1,0 +1,190 @@
+@page "/"
+
+<PageMeta Title="Flere anmeldelser med ét tryk"
+          Description="RateNOW laver NFC-kort, standere og klistermærker, der gør det nemt for jeres kunder at anmelde jer på Google og Trustpilot. Ingen app, ingen abonnement." />
+
+<section class="hero">
+    <div class="container hero__grid">
+        <div>
+            <span class="hero__badge">
+                <Icon Name="no-subscription" Size="17" />
+                Ingen abonnement · Ingen binding
+            </span>
+
+            <h1>Gør det nemt for kunden at sige det pæne højt</h1>
+
+            <p class="lead">
+                De fleste kunder vil gerne give jer en anmeldelse. De glemmer det bare, så snart
+                de er ude ad døren. Et lille tryk med telefonen på vores kort, stander eller
+                klistermærke åbner jeres Google- eller Trustpilot-side med det samme.
+            </p>
+
+            <div class="btn-row" style="margin-top:28px">
+                <a class="btn btn--primary btn--lg" href="produkter">Se produkterne</a>
+                <a class="btn btn--light btn--lg" href="kontakt">Få en uforpligtende snak</a>
+            </div>
+
+            <ul class="hero__points">
+                <li><Icon Name="check-circle" Size="19" /> <span>Kunden skal ikke hente en app eller oprette noget</span></li>
+                <li><Icon Name="check-circle" Size="19" /> <span>Virker på både iPhone og Android — og QR-kode som backup</span></li>
+                <li><Icon Name="check-circle" Size="19" /> <span>Vi programmerer produktet, før det bliver sendt til jer</span></li>
+            </ul>
+        </div>
+
+        <TapAnimation Class="hero__art" />
+    </div>
+</section>
+
+<section class="section section--tight">
+    <div class="container">
+        <div class="stat-band">
+            <div>
+                <div class="stat__value">0 kr.</div>
+                <p class="stat__label">i månedligt abonnement. Du køber produktet én gang.</p>
+            </div>
+            <div>
+                <div class="stat__value">1 tryk</div>
+                <p class="stat__label">fra kundens telefon til jeres anmeldelsesside.</p>
+            </div>
+            <div>
+                <div class="stat__value">1 opgave</div>
+                <p class="stat__label">til jer: stille den på bordet. Resten klarer vi.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Center="true"
+                     Eyebrow="Produkter"
+                     Title="Vælg den form, der passer til jeres hverdag"
+                     Lead="Samme teknik i bunden — forskellen er, hvor den skal stå, og hvem der skal have den i hånden." />
+
+        <div class="grid grid--3">
+            @foreach (var product in SiteContent.Products.Take(3))
+            {
+                <ProductCard Item="product" ShowHighlights="false" />
+            }
+        </div>
+
+        <div class="btn-row" style="justify-content:center;margin-top:36px">
+            <a class="btn btn--outline" href="produkter">
+                Se alle produkter og detaljer <Icon Name="arrow-right" Size="17" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <SectionHead Eyebrow="Sådan virker det"
+                     Title="Fire trin — og de tre af dem er vores"
+                     Lead="Du skal hverken installere software, oprette en konto eller forstå, hvad NFC står for." />
+
+        <div class="steps">
+            @foreach (var step in SiteContent.Steps)
+            {
+                <div class="step">
+                    <div class="step__num">@step.Number</div>
+                    <div>
+                        <h3>@step.Title</h3>
+                        <p>@step.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Eyebrow="Møde og levering"
+                     Title="Vi sætter os gerne ned og snakker om det først"
+                     Lead="Vi kan mødes med jer, køre produktet ud eller sende det med fragt. I vælger, hvad der passer jer bedst. Det eneste, I skal gøre, er at række ud efter os." />
+
+        <div class="grid grid--3">
+            <div class="card">
+                <div class="icon-tile"><Icon Name="honest" Size="26" /></div>
+                <h3>Et møde ansigt til ansigt</h3>
+                <p class="card__body">
+                    Vil I hellere sidde og vende det med et menneske end at læse om det?
+                    Så kommer vi ud og fortæller om produktet, svarer på det, I er i tvivl om,
+                    og kigger på, hvor det giver mening hos netop jer. Helt uforpligtende.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon-tile"><Icon Name="map-pin" Size="26" /></div>
+                <h3>Vi kommer med produktet</h3>
+                <p class="card__body">
+                    Bliver det til en handel, kører en fra RateNOW gerne ud til jer med det,
+                    sætter det op på stedet og viser personalet, hvordan de bruger det over for kunderne.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon-tile"><Icon Name="truck" Size="26" /></div>
+                <h3>Eller bare med fragt</h3>
+                <p class="card__body">
+                    Har I ikke brug for os stående i butikken, sender vi det.
+                    Produktet er programmeret og klar til brug, når I åbner pakken.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <SectionHead Center="true"
+                     Eyebrow="Vores holdning"
+                     Title="Vi sælger et produkt, ikke et abonnement"
+                     Lead="Der er rigeligt med firmaer, der gerne binder jer til en månedlig regning. Vi har valgt en anden model." />
+
+        <div class="grid grid--4">
+            @foreach (var value in SiteContent.Values)
+            {
+                <div class="card value">
+                    <div class="icon-tile" style="margin-bottom:0">
+                        <Icon Name="@value.Icon" Size="26" />
+                    </div>
+                    <h3>@value.Title</h3>
+                    <p>@value.Body</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <figure class="quote">
+            <div class="stars" aria-hidden="true">
+                <Icon Name="star" Size="22" /><Icon Name="star" Size="22" /><Icon Name="star" Size="22" />
+                <Icon Name="star" Size="22" /><Icon Name="star" Size="22" />
+            </div>
+            <blockquote>
+                “En god anmeldelse skal komme fra en kunde, der faktisk var glad.
+                Vores opgave er bare at fjerne de tre klik, der står i vejen.”
+            </blockquote>
+            <figcaption>Sådan arbejder vi hos RateNOW</figcaption>
+        </figure>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container container--narrow">
+        <SectionHead Center="true"
+                     Eyebrow="Spørgsmål"
+                     Title="Det, vi oftest bliver spurgt om" />
+
+        <FaqList Items="SiteContent.Faq.Take(4)" />
+
+        <div class="btn-row" style="justify-content:center;margin-top:28px">
+            <a class="btn btn--outline" href="faq">
+                Se alle spørgsmål <Icon Name="arrow-right" Size="17" />
+            </a>
+        </div>
+    </div>
+</section>
+
+<CtaBand />

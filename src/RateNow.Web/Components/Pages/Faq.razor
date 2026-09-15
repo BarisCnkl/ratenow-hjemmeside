@@ -1,0 +1,25 @@
+@page "/faq"
+
+<PageMeta Title="Ofte stillede spørgsmål"
+          Description="Svar på det, virksomheder oftest spørger om: teknik, pris, regler for anmeldelser og levering." />
+
+<PageHead Eyebrow="Spørgsmål og svar"
+          Title="Det, folk plejer at spørge om"
+          Lead="Står svaret ikke her, så skriv til os. Vi tilføjer det gerne til listen bagefter." />
+
+<section class="section">
+    <div class="container container--narrow">
+        @foreach (var group in SiteContent.Faq.GroupBy(f => f.Category))
+        {
+            <div style="margin-bottom:44px">
+                <h2 style="margin-bottom:18px">@group.Key</h2>
+                <FaqList Items="group" />
+            </div>
+        }
+    </div>
+</section>
+
+<CtaBand Title="Fik du ikke svar?"
+         Body="Skriv spørgsmålet til os, som du ville stille det til en kollega. Vi svarer på samme måde."
+         PrimaryLabel="Stil dit spørgsmål"
+         ShowSecondary="false" />

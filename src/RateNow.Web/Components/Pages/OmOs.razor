@@ -1,0 +1,106 @@
+@page "/om-os"
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+@* Teksten herunder er et udkast. Skriv din egen historie ind — den sælger bedre end vores. *@
+
+<PageMeta Title="Om os"
+          Description="RateNOW hjælper danske virksomheder med at få flere ægte anmeldelser. Uden abonnement og uden salgstricks." />
+
+<PageHead Eyebrow="Om os"
+          Title="Vi er her for at hjælpe en forretning — ikke for at fylde en abonnementsliste"
+          Lead="RateNOW er en dansk virksomhed. Vi laver fysiske produkter, der løser én konkret opgave: at gøre det nemt for jeres kunder at anmelde jer." />
+
+<section class="section">
+    <div class="container container--narrow prose">
+        <h2>Hvorfor vi startede</h2>
+        <p>
+            Anmeldelser afgør, hvem der bliver ringet op. Når to håndværkere står side om side på Google,
+            og den ene har 12 anmeldelser og den anden har 140, er valget som regel truffet, før nogen
+            har set en pris.
+        </p>
+        <p>
+            Det underlige er, at forskellen sjældent handler om kvaliteten af arbejdet. Den handler om,
+            hvem der huskede at spørge. Og det er svært at huske midt i en travl hverdag, hvor der er
+            kunder i røret og en regning der skal skrives.
+        </p>
+        <p>
+            Vi lavede RateNOW, fordi den opgave godt kan klares med et stykke plast og en chip. Ikke med et system, en licens og en konsulent.
+        </p>
+
+        <h2>Vi mødes gerne med jer</h2>
+        <p>
+            Vil I hellere sidde over for et menneske end at læse en side, så kommer vi ud til jer.
+            Vi tager produkterne med, fortæller om dem og svarer på det, I er i tvivl om. Det gælder
+            også, hvis I bare vil høre mere og ikke er tæt på at beslutte jer. Et møde koster
+            ingenting og forpligter jer ikke til noget.
+        </p>
+        <p>
+            Vi prioriterer den slags møder, fordi det er lettere at finde den rigtige løsning,
+            når vi har set stedet og talt med dem, der skal bruge produktet til daglig.
+        </p>
+
+        <h2>Sådan arbejder vi</h2>
+        <p>
+            Du får fat i et menneske, når du skriver. Du får et ærligt svar på, om vores produkt
+            giver mening for netop jeres forretning — også når svaret er nej. Og du får en pris,
+            der ikke ændrer sig, når du siger ja.
+        </p>
+        <p>
+            Vi filtrerer ikke anmeldelser, vi køber ikke anmeldelser, og vi hjælper ikke med at skjule
+            de dårlige. Ikke fordi vi er specielt fromme, men fordi det er en dårlig forretning for jer:
+            Google og Trustpilot opdager det, og så er det jeres profil, der betaler prisen — ikke vores.
+        </p>
+
+        <h2>Hvem vi arbejder med</h2>
+        <p>
+            Restauranter, frisører, klinikker, køreskoler, autoværksteder, håndværkere, butikker
+            og fitnesscentre. Fælles for dem er, at de møder deres kunder fysisk, og at kunderne
+            går ud ad døren tilfredse uden at tænke på at skrive det nogen steder.
+        </p>
+        <p>
+            Køreskoler er et godt eksempel. Eleven er sjældent gladere end den dag, prøven er bestået,
+            og kørelæreren står lige ved siden af. Det er her, kortet kommer frem — ikke i en mail
+            to uger senere.
+        </p>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Center="true" Title="Fire løfter, vi godt tør skrive ned" />
+        <div class="grid grid--4">
+            @foreach (var value in SiteContent.Values)
+            {
+                <div class="card value">
+                    <div class="icon-tile" style="margin-bottom:0"><Icon Name="@value.Icon" Size="26" /></div>
+                    <h3>@value.Title</h3>
+                    <p>@value.Body</p>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container container--narrow">
+        <div class="form-card">
+            <h2>Kom i kontakt</h2>
+            <p class="muted">@Site.Value.ResponsePromise</p>
+
+            <div class="contact-line">
+                <Icon Name="mail" Size="20" />
+                <span><strong>E-mail</strong><a href="mailto:@Site.Value.Email">@Site.Value.Email</a></span>
+            </div>
+            <div class="contact-line">
+                <Icon Name="phone" Size="20" />
+                <span><strong>Telefon</strong><a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></span>
+            </div>
+            <div class="contact-line">
+                <Icon Name="clock" Size="20" />
+                <span><strong>Træffetid</strong>@Site.Value.OpeningHours</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<CtaBand />

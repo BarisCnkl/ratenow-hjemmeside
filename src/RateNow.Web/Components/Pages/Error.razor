@@ -1,0 +1,33 @@
+@page "/Error"
+@using System.Diagnostics
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+<PageTitle>Der gik noget galt</PageTitle>
+
+<PageHead Title="Der gik noget galt"
+          Lead="Vi beklager. Prøv igen om et øjeblik — og skriv gerne til os, hvis det bliver ved." />
+
+<section class="section">
+    <div class="container">
+        <div class="btn-row">
+            <a class="btn btn--primary" href="/">Tilbage til forsiden</a>
+            <a class="btn btn--outline" href="mailto:@Site.Value.Email">Skriv til @Site.Value.Email</a>
+        </div>
+
+        @if (!string.IsNullOrEmpty(RequestId))
+        {
+            <p class="small muted" style="margin-top:26px">
+                Reference: <code>@RequestId</code>
+            </p>
+        }
+    </div>
+</section>
+
+@code {
+    [CascadingParameter] private HttpContext? HttpContext { get; set; }
+
+    private string? RequestId { get; set; }
+
+    protected override void OnInitialized() =>
+        RequestId = Activity.Current?.Id ?? HttpContext?.TraceIdentifier;
+}

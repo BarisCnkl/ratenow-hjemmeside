@@ -1,0 +1,19 @@
+@* Logomærket: en ring i Googles fire farver med en stjerne i midten. *@
+
+<svg class="brand__mark" width="@Size" height="@Size" viewBox="0 0 34 34" role="img" aria-label="RateNOW">
+    <rect width="34" height="34" rx="10" fill="@(OnDark ? "#ffffff" : "#0d1b2a")" />
+    <g fill="none" stroke-width="2.5" stroke-linecap="round">
+        <path d="M17 6a11 11 0 0 1 11 11" stroke="#4285f4" />
+        <path d="M28 17a11 11 0 0 1-11 11" stroke="#34a853" />
+        <path d="M17 28A11 11 0 0 1 6 17" stroke="#fbbc05" />
+        <path d="M6 17A11 11 0 0 1 17 6" stroke="#ea4335" />
+    </g>
+    <path transform="translate(17 17) scale(0.56) translate(-12 -12)"
+          d="m12 2.6 2.9 5.9 6.5.95-4.7 4.6 1.1 6.45L12 17.45 6.2 20.5l1.1-6.45L2.6 9.45l6.5-.95L12 2.6Z"
+          fill="@(OnDark ? "#0d1b2a" : "#ffffff")" />
+</svg>
+
+@code {
+    [Parameter] public int Size { get; set; } = 34;
+    [Parameter] public bool OnDark { get; set; }
+}

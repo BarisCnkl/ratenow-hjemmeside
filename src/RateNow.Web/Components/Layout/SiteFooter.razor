@@ -1,0 +1,57 @@
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div>
+                <a class="footer-brand" href="/">
+                    <Logo Size="34" OnDark="true" />
+                    <span>@Site.Value.CompanyName</span>
+                </a>
+                <p class="small">
+                    Vi laver NFC-kort, standere og klistermærker, der gør det nemt for jeres
+                    kunder at give en anmeldelse, mens de husker besøget. Ingen abonnement.
+                </p>
+            </div>
+
+            <div>
+                <h4>Produkter</h4>
+                <ul class="footer-list small">
+                    @foreach (var product in SiteContent.Products)
+                    {
+                        <li><a href="produkter#@product.Slug">@product.Name</a></li>
+                    }
+                </ul>
+            </div>
+
+            <div>
+                <h4>Om @Site.Value.CompanyName</h4>
+                <ul class="footer-list small">
+                    <li><a href="saadan-virker-det">Sådan virker det</a></li>
+                    <li><a href="priser">Priser</a></li>
+                    <li><a href="om-os">Om os</a></li>
+                    <li><a href="faq">Ofte stillede spørgsmål</a></li>
+                    <li><a href="kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4>Få fat i os</h4>
+                <ul class="footer-list small">
+                    <li><a href="mailto:@Site.Value.Email">@Site.Value.Email</a></li>
+                    <li><a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></li>
+                    <li>@Site.Value.OpeningHours</li>
+                    <li>@Site.Value.AddressLine</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <span>© @DateTime.Now.Year @Site.Value.LegalName</span>
+            <span>
+                <a href="privatlivspolitik">Privatlivspolitik</a> ·
+                <a href="handelsbetingelser">Handelsbetingelser</a>
+            </span>
+        </div>
+    </div>
+</footer>

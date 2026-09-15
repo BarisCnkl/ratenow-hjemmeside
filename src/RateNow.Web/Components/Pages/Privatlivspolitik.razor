@@ -1,0 +1,69 @@
+@page "/privatlivspolitik"
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+@* UDKAST. Teksten er et udgangspunkt — få den læst igennem, før siden går live. *@
+
+<PageMeta Title="Privatlivspolitik"
+          Description="Sådan behandler RateNOW personoplysninger fra kontaktformularen og hjemmesiden." />
+
+<PageHead Title="Privatlivspolitik"
+          Lead="Kort fortalt: vi gemmer det, du selv skriver til os, og bruger det kun til at svare dig." />
+
+<section class="section">
+    <div class="container container--narrow prose">
+        <h2>Hvem er dataansvarlig</h2>
+        <p>
+            @Identitet.
+            Du kan altid skrive til <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>.
+        </p>
+
+        <h2>Hvilke oplysninger vi behandler</h2>
+        <p>
+            Når du udfylder kontaktformularen, gemmer vi dit navn, virksomhedens navn, din e-mail,
+            dit telefonnummer, hvis du har skrevet det, og indholdet af din besked.
+        </p>
+
+        <h2>Hvad vi bruger dem til</h2>
+        <p>
+            Udelukkende til at besvare din henvendelse og til den efterfølgende dialog om en eventuel ordre.
+            Vi sælger ikke oplysninger videre, og vi tilmelder dig ikke et nyhedsbrev, du ikke har bedt om.
+            Behandlingen sker på grundlag af vores legitime interesse i at svare på henvendelser samt,
+            hvis det ender i en handel, opfyldelsen af aftalen med dig.
+        </p>
+
+        <h2>Hvor længe vi gemmer dem</h2>
+        <p>
+            Henvendelser, der ikke fører til en aftale, sletter vi senest efter 12 måneder.
+            Bliver du kunde, opbevarer vi bogføringsmateriale i fem år plus indeværende regnskabsår,
+            fordi bogføringsloven kræver det.
+        </p>
+
+        <h2>Hvem der får adgang</h2>
+        <p>
+            Kun os. Vi anvender databehandlere til drift af hjemmeside og e-mail, og de behandler
+            udelukkende oplysningerne efter vores instruks.
+        </p>
+
+        <h2>Cookies</h2>
+        <p>
+            Siden bruger ikke cookies til statistik, markedsføring eller sporing. Der sættes kun de
+            tekniske cookies, som er nødvendige for, at siden og kontaktformularen fungerer sikkert.
+        </p>
+
+        <h2>Dine rettigheder</h2>
+        <p>
+            Du kan bede om indsigt i de oplysninger, vi har om dig, få dem rettet eller slettet og
+            gøre indsigelse mod behandlingen. Skriv til <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>,
+            så svarer vi hurtigst muligt. Er du ikke tilfreds med vores svar, kan du klage til
+            Datatilsynet, Carl Jacobsens Vej 35, 2500 Valby.
+        </p>
+    </div>
+</section>
+
+@code {
+    // CVR vises kun, hvis feltet er udfyldt i appsettings.json.
+    private string Identitet =>
+        string.IsNullOrWhiteSpace(Site.Value.Cvr)
+            ? $"{Site.Value.LegalName}, {Site.Value.AddressLine}"
+            : $"{Site.Value.LegalName}, CVR {Site.Value.Cvr}, {Site.Value.AddressLine}";
+}

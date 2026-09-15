@@ -1,0 +1,14 @@
+@* Sætter sidetitel og beskrivelse. Bruges øverst på hver side. *@
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+<PageTitle>@Title — @Site.Value.CompanyName</PageTitle>
+<HeadContent>
+    <meta name="description" content="@Description" />
+    <meta property="og:title" content="@Title" />
+    <meta property="og:description" content="@Description" />
+</HeadContent>
+
+@code {
+    [Parameter, EditorRequired] public string Title { get; set; } = string.Empty;
+    [Parameter, EditorRequired] public string Description { get; set; } = string.Empty;
+}

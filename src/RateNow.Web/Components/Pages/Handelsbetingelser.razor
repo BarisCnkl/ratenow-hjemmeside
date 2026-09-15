@@ -1,0 +1,80 @@
+@page "/handelsbetingelser"
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+@* UDKAST. Tilpas leveringstid, betalingsform og returret til, hvordan I faktisk gør. *@
+
+<PageMeta Title="Handelsbetingelser"
+          Description="Betingelser for køb hos RateNOW: priser, levering, betaling og reklamation." />
+
+<PageHead Title="Handelsbetingelser"
+          Lead="De vilkår, der gælder, når I køber et produkt hos os." />
+
+<section class="section">
+    <div class="container container--narrow prose">
+        <h2>Sælger</h2>
+        <p>
+            @Identitet.
+            E-mail <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>,
+            telefon <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a>.
+        </p>
+
+        <h2>Priser</h2>
+        <p>
+            Alle priser på siden er vejledende og angivet ekskl. moms. Den endelige pris fremgår af
+            det tilbud, I modtager, inden ordren bekræftes. Fragt oplyses særskilt.
+        </p>
+
+        <h2>Bestilling og aftale</h2>
+        <p>
+            En aftale er indgået, når vi har sendt jer en ordrebekræftelse. Indtil da er der ingen
+            forpligtelser på nogen af siderne.
+        </p>
+
+        <h2>Betaling</h2>
+        <p>
+            Der faktureres efter aftale. Betalingsfrist fremgår af fakturaen. Ved for sen betaling
+            beregnes renter efter renteloven.
+        </p>
+
+        <h2>Levering</h2>
+        <p>
+            Standardprodukter afsendes normalt inden for få hverdage efter ordrebekræftelsen.
+            Produkter med eget tryk leveres efter nærmere aftalt dato. Oplyste leveringstider er
+            vejledende og ikke bindende.
+        </p>
+
+        <h2>Fortrydelse og returnering</h2>
+        <p>
+            Køb mellem virksomheder er ikke omfattet af forbrugeraftalelovens fortrydelsesret.
+            Standardvarer tages retur efter aftale inden for 14 dage, hvis de er ubrugte og i
+            original stand. Varer, der er fremstillet med jeres eget design eller logo, kan ikke returneres.
+        </p>
+
+        <h2>Reklamation</h2>
+        <p>
+            Er der en fejl ved produktet, så kontakt os hurtigst muligt. Vi ombytter eller
+            krediterer varen. Reklamation over synlige fejl skal ske senest 8 dage efter modtagelsen.
+        </p>
+
+        <h2>Ansvar</h2>
+        <p>
+            Vi leverer et produkt, der peger på jeres anmeldelsesside. Vi kan ikke garantere et bestemt
+            antal anmeldelser, og vi er ikke ansvarlige for ændringer, som Google, Trustpilot eller andre
+            platforme foretager i deres tjenester. Vores erstatningsansvar kan ikke overstige
+            det beløb, I har betalt for den pågældende ordre, og omfatter ikke indirekte tab.
+        </p>
+
+        <h2>Lovvalg</h2>
+        <p>
+            Aftalen er underlagt dansk ret. Eventuelle tvister afgøres ved de danske domstole.
+        </p>
+    </div>
+</section>
+
+@code {
+    // CVR vises kun, hvis feltet er udfyldt i appsettings.json.
+    private string Identitet =>
+        string.IsNullOrWhiteSpace(Site.Value.Cvr)
+            ? $"{Site.Value.LegalName}, {Site.Value.AddressLine}"
+            : $"{Site.Value.LegalName}, CVR {Site.Value.Cvr}, {Site.Value.AddressLine}";
+}

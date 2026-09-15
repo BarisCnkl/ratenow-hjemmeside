@@ -1,0 +1,50 @@
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+<!DOCTYPE html>
+<html lang="da">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <base href="/" />
+    <meta name="theme-color" content="#0d1b2a" />
+    <meta property="og:site_name" content="@Site.Value.CompanyName" />
+    <meta property="og:type" content="website" />
+    @* Al styling ligger i app.css. Tilføjer du på et tidspunkt en .razor.css-fil til en
+       komponent, skal denne linje ind igen:
+       <link rel="stylesheet" href="@@Assets["RateNow.Web.styles.css"]" /> *@
+    <link rel="stylesheet" href="@Assets["app.css"]" />
+    <ImportMap />
+    <script type="application/ld+json">@((MarkupString)OrganizationJson)</script>
+    @* Fanens ikon. @@Assets giver filerne et versionsnavn, så browseren ikke
+       bliver ved med at vise en gammel udgave fra sin cache. *@
+    <link rel="icon" type="image/svg+xml" href="@Assets["favicon.svg"]" />
+    <link rel="alternate icon" type="image/png" href="@Assets["favicon.png"]" />
+    <link rel="apple-touch-icon" href="@Assets["apple-touch-icon.png"]" />
+    <HeadOutlet />
+</head>
+
+<body>
+    <a class="skip-link" href="#indhold">Spring til indhold</a>
+    <Routes />
+    <script src="_framework/blazor.web.js"></script>
+    <script src="@Assets["js/site.js"]"></script>
+</body>
+
+</html>
+
+@code {
+    // Virksomhedsoplysninger til Google i maskinlæsbar form.
+    private string OrganizationJson => System.Text.Json.JsonSerializer.Serialize(
+        new Dictionary<string, object?>
+        {
+            ["@context"] = "https://schema.org",
+            ["@type"] = "Organization",
+            ["name"] = Site.Value.CompanyName,
+            ["description"] = "Leverandør af NFC-kort, standere og klistermærker, "
+                              + "der gør det nemt for kunder at anmelde en virksomhed.",
+            ["email"] = Site.Value.Email,
+            ["telephone"] = Site.Value.Phone,
+            ["areaServed"] = "DK"
+        });
+}

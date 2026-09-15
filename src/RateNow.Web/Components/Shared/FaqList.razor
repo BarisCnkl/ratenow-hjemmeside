@@ -1,0 +1,15 @@
+@* Foldbar FAQ bygget på <details>, så den virker uden JavaScript. *@
+
+<div class="faq">
+    @foreach (var item in Items)
+    {
+        <details class="faq__item">
+            <summary class="faq__q">@item.Question</summary>
+            <div class="faq__a">@item.Answer</div>
+        </details>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public IEnumerable<FaqItem> Items { get; set; } = [];
+}

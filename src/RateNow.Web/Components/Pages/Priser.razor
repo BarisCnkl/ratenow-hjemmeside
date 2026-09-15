@@ -1,0 +1,118 @@
+@page "/priser"
+
+@* OBS: priserne hentes fra SiteContent.Products. Ret dem dér — ikke her. *@
+
+<PageMeta Title="Priser"
+          Description="Én pris for produktet. Ingen abonnement, ingen binding og ingen opstartsgebyrer." />
+
+<PageHead Eyebrow="Priser"
+          Title="Du betaler for et produkt. Så er det dit."
+          Lead="Vi har fravalgt abonnementer, fordi vi selv bliver trætte af dem. Priserne herunder er for én enhed. Skal I bruge flere, tager vi en snak om tallet." />
+
+<section class="section">
+    <div class="container">
+        <div class="grid grid--4">
+            @foreach (var product in SiteContent.Products)
+            {
+                <article class="card">
+                    @if (product.IsPopular)
+                    {
+                        <span class="ribbon">Mest valgt</span>
+                    }
+                    <div class="icon-tile"><Icon Name="@product.Icon" Size="26" /></div>
+                    <h3>@product.Name</h3>
+                    <div class="stat__value" style="font-size:1.7rem;margin:6px 0 2px">@product.PriceLabel</div>
+                    @if (!string.IsNullOrWhiteSpace(product.PriceNote))
+                    {
+                        <p class="card__price-note" style="margin:0 0 8px">@product.PriceNote</p>
+                    }
+                    <p class="small muted">@product.Tagline</p>
+                    <ul class="check-list">
+                        @foreach (var highlight in product.Highlights.Take(3))
+                        {
+                            <li><Icon Name="check" Size="17" /> <span>@highlight</span></li>
+                        }
+                    </ul>
+                    <div class="card__foot">
+                        <a class="btn btn--outline btn--block" href="kontakt?emne=@product.Slug">Spørg om pris</a>
+                    </div>
+                </article>
+            }
+        </div>
+
+        <p class="small muted" style="margin-top:24px">
+            Priserne gælder én enhed. Skal I have flere eller eget tryk, får I et konkret tilbud,
+            før der sker noget. Skriv gerne her, om priserne er med eller uden moms.
+        </p>
+    </div>
+</section>
+
+<section class="section section--tight">
+    <div class="container">
+        <div class="grid grid--2">
+            <div class="card">
+                <div class="icon-tile"><Icon Name="chart" Size="26" /></div>
+                <h3>Skal I bruge flere?</h3>
+                <p class="card__body">
+                    Så er prisen til forhandling. Vi har ikke sat en fast rabattrappe op, fordi
+                    et bageri med to kasseapparater og en kæde med tolv butikker ikke er den samme opgave.
+                    Skriv eller ring med antallet, så får I et tal tilbage.
+                </p>
+            </div>
+            <div class="card">
+                <div class="icon-tile"><Icon Name="help" Size="26" /></div>
+                <h3>Vil I hellere mødes om det?</h3>
+                <p class="card__body">
+                    Så kommer vi ud og sætter os ned med jer. I får produkterne i hånden,
+                    vi svarer på det, I er i tvivl om, og I beslutter jer bagefter — eller lader være.
+                    Et møde koster ingenting og forpligter jer ikke til noget.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Eyebrow="Det med småt"
+                     Title="Her er alt det, der ikke koster ekstra"
+                     Lead="Vi har prøvet at fjerne de linjer, man plejer at opdage på fakturaen bagefter." />
+
+        <div class="grid grid--2">
+            <div class="card">
+                <ul class="check-list" style="margin-top:0">
+                    <li><Icon Name="check" Size="18" /> <span>Opsætning og programmering af jeres link</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Hjælp til at finde jeres Google- eller Trustpilot-link</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Skift af link senere, hvis I ændrer platform</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Rådgivning om hvor produktet gør mest gavn</span></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>Og her er, hvad der ikke findes</h3>
+                <ul class="check-list">
+                    <li><Icon Name="no-subscription" Size="18" /> <span>Månedligt abonnement</span></li>
+                    <li><Icon Name="no-subscription" Size="18" /> <span>Bindingsperiode og opsigelsesvarsel</span></li>
+                    <li><Icon Name="no-subscription" Size="18" /> <span>Opstartsgebyr</span></li>
+                    <li><Icon Name="no-subscription" Size="18" /> <span>En konto I skal logge ind på for at bruge jeres eget link</span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container container--narrow">
+        <SectionHead Title="Spørgsmål om pris" Center="true" />
+        <FaqList Items="PrisFaq" />
+    </div>
+</section>
+
+<CtaBand Title="Skal I have et tilbud?"
+         Body="Skriv hvor mange enheder I skal bruge, og om der skal trykkes jeres eget design. Så vender vi tilbage med en pris — ikke et salgsmøde."
+         PrimaryLabel="Bed om et tilbud"
+         ShowSecondary="false" />
+
+@code {
+    private static readonly IReadOnlyList<FaqItem> PrisFaq =
+        SiteContent.Faq.Where(f => f.Category == "Pris").ToList();
+}

@@ -1,0 +1,40 @@
+<article class="card card--link">
+    @if (Item.IsPopular)
+    {
+        <span class="ribbon">Mest valgt</span>
+    }
+
+    <ProductArt Kind="@Item.Slug" Label="@($"Illustration af {Item.Name}")" />
+
+    <h3>@Item.Name</h3>
+    <p class="card__tagline">@Item.Tagline</p>
+    <p class="card__body">@Item.Description</p>
+
+    @if (ShowHighlights)
+    {
+        <ul class="check-list">
+            @foreach (var highlight in Item.Highlights)
+            {
+                <li><Icon Name="check" Size="17" /> <span>@highlight</span></li>
+            }
+        </ul>
+    }
+
+    <div class="card__foot">
+        <span class="card__price">
+            @Item.PriceLabel
+            @if (!string.IsNullOrWhiteSpace(Item.PriceNote))
+            {
+                <span class="card__price-note">@Item.PriceNote</span>
+            }
+        </span>
+        <a class="btn btn--outline" href="/kontakt?emne=@Item.Slug">
+            Spørg om @Item.Name <Icon Name="arrow-right" Size="17" />
+        </a>
+    </div>
+</article>
+
+@code {
+    [Parameter, EditorRequired] public Product Item { get; set; } = default!;
+    [Parameter] public bool ShowHighlights { get; set; } = true;
+}

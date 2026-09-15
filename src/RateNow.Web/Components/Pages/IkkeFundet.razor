@@ -1,0 +1,20 @@
+@page "/ikke-fundet"
+
+@* Vises når en URL ikke findes. Middlewaren i Program.cs sender ukendte adresser hertil
+   og beholder 404-statuskoden, så søgemaskiner forstår, hvad der skete. *@
+
+<PageMeta Title="Siden findes ikke"
+          Description="Vi kunne ikke finde den side. Prøv menuen foroven eller skriv til os." />
+
+<PageHead Title="Den side kunne vi ikke finde"
+          Lead="Måske er linket gammelt, eller også har vi flyttet noget. Prøv menuen foroven." />
+
+<section class="section">
+    <div class="container">
+        <div class="btn-row">
+            <a class="btn btn--primary" href="/">Tilbage til forsiden</a>
+            <a class="btn btn--outline" href="produkter">Se produkterne</a>
+            <a class="btn btn--outline" href="kontakt">Skriv til os</a>
+        </div>
+    </div>
+</section>

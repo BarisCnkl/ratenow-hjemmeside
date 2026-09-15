@@ -1,0 +1,26 @@
+@inject Microsoft.Extensions.Options.IOptions<SiteSettings> Site
+
+<header class="site-header">
+    <div class="container site-header__inner">
+        <a class="brand" href="/">
+            <Logo Size="34" />
+            <span>@Site.Value.CompanyName</span>
+        </a>
+
+        @* Checkboxen styrer mobilmenuen, så den også virker uden JavaScript. *@
+        <input class="nav-toggle" type="checkbox" id="nav-toggle" />
+        <label class="burger" for="nav-toggle" aria-label="Åbn og luk menu">
+            <span></span>
+        </label>
+
+        <nav class="nav" aria-label="Hovedmenu">
+            <NavLink class="nav__link" href="" Match="NavLinkMatch.All">Forside</NavLink>
+            <NavLink class="nav__link" href="produkter">Produkter</NavLink>
+            <NavLink class="nav__link" href="saadan-virker-det">Sådan virker det</NavLink>
+            <NavLink class="nav__link" href="priser">Priser</NavLink>
+            <NavLink class="nav__link" href="om-os">Om os</NavLink>
+            <NavLink class="nav__link" href="faq">Spørgsmål</NavLink>
+            <a class="btn btn--primary nav__cta" href="kontakt">Kontakt os</a>
+        </nav>
+    </div>
+</header>

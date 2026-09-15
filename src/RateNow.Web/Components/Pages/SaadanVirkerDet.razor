@@ -1,0 +1,137 @@
+@page "/saadan-virker-det"
+
+<PageMeta Title="Sådan virker det"
+          Description="Fra bestilling til første anmeldelse. Se hvordan NFC virker, hvad I skal gøre, og hvad vi klarer for jer." />
+
+<PageHead Eyebrow="Sådan virker det"
+          Title="Fra bestilling til første anmeldelse"
+          Lead="Vi har skåret det ned til det, der er nødvendigt. Du skal ikke igennem en onboarding, et dashboard eller en opsætningsguide." />
+
+<section class="section">
+    <div class="container">
+        <div class="steps">
+            @foreach (var step in SiteContent.Steps)
+            {
+                <div class="step">
+                    <div class="step__num">@step.Number</div>
+                    <div>
+                        <h3>@step.Title</h3>
+                        <p>@step.Description</p>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<section class="hero">
+    <div class="container hero__grid">
+        <div>
+            <span class="eyebrow" style="color:#8fc0ff">Se det ske</span>
+            <h2>Hele forløbet tager under fem sekunder</h2>
+            <p class="lead">
+                Kunden holder telefonen op til standeren. Chippen sender jeres link videre,
+                telefonen åbner anmeldelsessiden, og stjernerne står klar. Ingen app,
+                ingen indtastning, ingen forklaring fra jer.
+            </p>
+        </div>
+        <TapAnimation Class="hero__art" />
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container">
+        <SectionHead Eyebrow="Teknikken"
+                     Title="Hvad NFC egentlig er"
+                     Lead="Den korte version, uden ord I skal slå op bagefter." />
+
+        <div class="grid grid--2">
+            <div class="card">
+                <div class="icon-tile"><Icon Name="tap" Size="26" /></div>
+                <h3>En chip uden batteri</h3>
+                <p class="card__body">
+                    Inde i kortet eller standeren sidder en lille chip. Den har hverken batteri
+                    eller ledning. Når en telefon kommer tæt på, får chippen strøm fra telefonen
+                    og sender et link tilbage. Derfor kan den ligge i en skuffe i årevis og stadig virke.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon-tile"><Icon Name="card" Size="26" /></div>
+                <h3>Det samme som kontaktløs betaling</h3>
+                <p class="card__body">
+                    Teknologien er den, telefonen allerede bruger, når man betaler i butikken.
+                    Den er indbygget i stort set alle telefoner solgt de seneste mange år,
+                    og kunden skal ikke slå noget til.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon-tile"><Icon Name="shield" Size="26" /></div>
+                <h3>Ingen data om kunden</h3>
+                <p class="card__body">
+                    Chippen indeholder et link — ikke andet. Den kan ikke læse noget fra telefonen,
+                    og vi registrerer ikke, hvem der har trykket. Ønsker I at kunne se, hvor
+                    mange tryk der har været, kan vi sætte det op, uden at gemme oplysninger om personer.
+                </p>
+            </div>
+
+            <div class="card">
+                <div class="icon-tile"><Icon Name="check-circle" Size="26" /></div>
+                <h3>QR-koden tager resten</h3>
+                <p class="card__body">
+                    Skulle en telefon være for gammel, eller NFC være slået fra, er der en QR-kode
+                    på produktet. Kunden åbner kameraet og peger på koden — samme resultat.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="container">
+        <SectionHead Eyebrow="Sådan bruger I den"
+                     Title="Det, der virker i praksis"
+                     Lead="Produktet gør arbejdet nemmere. Det, der afgør resultatet, er stadig at nogen spørger." />
+
+        <div class="grid grid--3">
+            <div class="card">
+                <h3>Spørg mens de er glade</h3>
+                <p class="card__body">
+                    Det bedste tidspunkt er lige efter, kunden har sagt tak. Ikke en uge senere i en mail.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Spørg alle på samme måde</h3>
+                <p class="card__body">
+                    Det er både den ærlige og den lovlige måde. Rækker I kun kortet frem til dem,
+                    I tror er tilfredse, er I ude i noget, Google ikke bryder sig om.
+                </p>
+            </div>
+            <div class="card">
+                <h3>Sig hvad der sker</h3>
+                <p class="card__body">
+                    “Hold lige telefonen her, så åbner den af sig selv.” Én sætning er nok.
+                    Kunder siger sjældent nej, når det tager fem sekunder.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section section--soft">
+    <div class="container container--narrow">
+        <SectionHead Title="Spørgsmål om teknikken" Center="true" />
+        <FaqList Items="TekniskFaq" />
+    </div>
+</section>
+
+<CtaBand Title="Er der noget, der stadig er uklart?"
+         Body="Ring eller skriv. Vi forklarer det gerne igen — også de dele, der lyder tekniske."
+         PrimaryLabel="Stil os et spørgsmål"
+         ShowSecondary="false" />
+
+@code {
+    private static readonly IReadOnlyList<FaqItem> TekniskFaq =
+        SiteContent.Faq.Where(f => f.Category == "Teknik").ToList();
+}

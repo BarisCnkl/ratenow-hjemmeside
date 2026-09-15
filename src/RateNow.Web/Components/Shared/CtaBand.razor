@@ -1,0 +1,26 @@
+<section class="section section--tight">
+    <div class="container">
+        <div class="cta-band">
+            <div>
+                <h2>@Title</h2>
+                <p>@Body</p>
+            </div>
+            <div class="btn-row">
+                <a class="btn btn--white btn--lg" href="/kontakt">@PrimaryLabel</a>
+                @if (ShowSecondary)
+                {
+                    <a class="btn btn--light btn--lg" href="/saadan-virker-det">Se hvordan det virker</a>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+@code {
+    [Parameter] public string Title { get; set; } = "Skal vi tage en snak?";
+    [Parameter] public string Body { get; set; } =
+        "Fortæl os kort om jeres forretning, så siger vi ærligt, om vi kan hjælpe — og hvad det koster. "
+        + "Vil I hellere tage den ansigt til ansigt, kommer vi ud og sætter os ned med jer.";
+    [Parameter] public string PrimaryLabel { get; set; } = "Skriv til os";
+    [Parameter] public bool ShowSecondary { get; set; } = true;
+}

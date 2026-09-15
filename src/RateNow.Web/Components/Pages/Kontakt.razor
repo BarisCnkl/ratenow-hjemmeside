@@ -1,0 +1,196 @@
+@page "/kontakt"
+@using Microsoft.Extensions.Options
+@inject IContactSubmissionSink Sink
+@inject IOptions<SiteSettings> Site
+@inject ILogger<Kontakt> Logger
+
+<PageMeta Title="Kontakt"
+          Description="Skriv til RateNOW. Vi svarer normalt inden for én arbejdsdag — og vi sætter dig ikke på en ringeliste." />
+
+<PageHead Eyebrow="Kontakt"
+          Title="Skriv et par linjer, så vender vi tilbage"
+          Lead="Du behøver ikke vide, hvad du vil købe. Fortæl hvad I laver, så foreslår vi noget — eller siger, at I ikke behøver os. Og vil I hellere tage den ansigt til ansigt, aftaler vi et møde." />
+
+<section class="section">
+    <div class="container contact-grid">
+        <div>
+            @if (_sent)
+            {
+                <div class="form-card">
+                    <div class="alert alert--ok">
+                        <strong>Tak — vi har modtaget din besked.</strong><br />
+                        @Site.Value.ResponsePromise
+                    </div>
+                    <p>
+                        Haster det, må du meget gerne ringe direkte på
+                        <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a>.
+                    </p>
+                    <div class="btn-row" style="margin-top:20px">
+                        <a class="btn btn--outline" href="produkter">Kig videre på produkterne</a>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="form-card">
+                    @if (_failed)
+                    {
+                        <div class="alert alert--err">
+                            Beskeden kunne desværre ikke sendes lige nu. Prøv igen, eller send en mail til
+                            <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>.
+                        </div>
+                    }
+
+                    <EditForm Model="Model" OnValidSubmit="HandleSubmitAsync" FormName="kontakt">
+                        <DataAnnotationsValidator />
+
+                        <div class="field field--pair">
+                            <div>
+                                <label class="label" for="navn">Dit navn</label>
+                                <InputText id="navn" class="input" @bind-Value="Model.Name" autocomplete="name" />
+                                <ValidationMessage For="() => Model.Name" class="validation-message" />
+                            </div>
+                            <div>
+                                <label class="label" for="virksomhed">Virksomhed</label>
+                                <InputText id="virksomhed" class="input" @bind-Value="Model.Company" autocomplete="organization" />
+                                <ValidationMessage For="() => Model.Company" class="validation-message" />
+                            </div>
+                        </div>
+
+                        <div class="field field--pair">
+                            <div>
+                                <label class="label" for="email">E-mail</label>
+                                <InputText id="email" type="email" class="input" @bind-Value="Model.Email" autocomplete="email" />
+                                <ValidationMessage For="() => Model.Email" class="validation-message" />
+                            </div>
+                            <div>
+                                <label class="label" for="telefon">
+                                    Telefon <span class="optional">(valgfrit)</span>
+                                </label>
+                                <InputText id="telefon" type="tel" class="input" @bind-Value="Model.Phone" autocomplete="tel" />
+                                <ValidationMessage For="() => Model.Phone" class="validation-message" />
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="emne">Hvad handler det om?</label>
+                            <InputSelect id="emne" class="select" @bind-Value="Model.Interest">
+                                <option value="">Vælg gerne noget — eller lad den stå</option>
+                                @foreach (var product in SiteContent.Products)
+                                {
+                                    <option value="@product.Slug">@product.Name</option>
+                                }
+                                <option value="flere">Pris på flere enheder</option>
+                                <option value="moede">Jeg vil gerne mødes og høre mere</option>
+                                <option value="raadgivning">Jeg vil bare vide, om det giver mening for os</option>
+                                <option value="andet">Noget helt andet</option>
+                            </InputSelect>
+                        </div>
+
+                        <div class="field">
+                            <label class="label" for="besked">Din besked</label>
+                            <InputTextArea id="besked" class="textarea" @bind-Value="Model.Message"
+                                           placeholder="For eksempel: Vi har en frisørsalon med to stole og vil gerne have flere Google-anmeldelser. Hvad foreslår I?" />
+                            <ValidationMessage For="() => Model.Message" class="validation-message" />
+                        </div>
+
+                        @* Honeypot — skjult for mennesker, udfyldes kun af robotter. *@
+                        <div class="honeypot" aria-hidden="true">
+                            <label for="website">Website</label>
+                            <InputText id="website" @bind-Value="Model.Website" tabindex="-1" autocomplete="off" />
+                        </div>
+
+                        <div class="field">
+                            <label class="checkbox">
+                                <InputCheckbox @bind-Value="Model.ConsentGiven" />
+                                <span>
+                                    Ja, I må gerne kontakte mig om min henvendelse. Vi bruger kun oplysningerne
+                                    til at svare dig — ikke til nyhedsbreve.
+                                </span>
+                            </label>
+                            <ValidationMessage For="() => Model.ConsentGiven" class="validation-message" />
+                        </div>
+
+                        <button class="btn btn--primary btn--lg" type="submit">
+                            Send besked <Icon Name="arrow-right" Size="18" />
+                        </button>
+                    </EditForm>
+                </div>
+            }
+        </div>
+
+        <aside>
+            <div class="form-card">
+                <h3>Eller fang os direkte</h3>
+
+                <div class="contact-line">
+                    <Icon Name="mail" Size="20" />
+                    <span><strong>E-mail</strong><a href="mailto:@Site.Value.Email">@Site.Value.Email</a></span>
+                </div>
+                <div class="contact-line">
+                    <Icon Name="phone" Size="20" />
+                    <span><strong>Telefon</strong><a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></span>
+                </div>
+                <div class="contact-line">
+                    <Icon Name="clock" Size="20" />
+                    <span><strong>Træffetid</strong>@Site.Value.OpeningHours</span>
+                </div>
+                <div class="contact-line">
+                    <Icon Name="map-pin" Size="20" />
+                    <span><strong>Adresse</strong>@Site.Value.AddressLine</span>
+                </div>
+            </div>
+
+            <div class="form-card" style="margin-top:22px">
+                <h3>Hvad sker der bagefter?</h3>
+                <ul class="check-list" style="margin-top:12px">
+                    <li><Icon Name="check" Size="18" /> <span>Vi læser beskeden og svarer med et forslag</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Du får en pris, før du skal beslutte noget</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Vil I mødes, aftaler vi et tidspunkt og kommer ud til jer</span></li>
+                    <li><Icon Name="check" Size="18" /> <span>Ingen ringeliste og ingen opfølgende salgsmails</span></li>
+                </ul>
+            </div>
+        </aside>
+    </div>
+</section>
+
+@code {
+    [SupplyParameterFromForm]
+    private ContactRequest Model { get; set; } = new();
+
+    [SupplyParameterFromQuery(Name = "emne")]
+    private string? PrefilledInterest { get; set; }
+
+    private bool _sent;
+    private bool _failed;
+
+    protected override void OnInitialized()
+    {
+        if (string.IsNullOrWhiteSpace(Model.Interest) && !string.IsNullOrWhiteSpace(PrefilledInterest))
+        {
+            Model.Interest = PrefilledInterest;
+        }
+    }
+
+    private async Task HandleSubmitAsync()
+    {
+        // Honeypot udfyldt betyder robot. Vi lader som om alt gik godt og smider beskeden væk.
+        if (!string.IsNullOrWhiteSpace(Model.Website))
+        {
+            _sent = true;
+            return;
+        }
+
+        try
+        {
+            await Sink.SubmitAsync(Model);
+            _sent = true;
+            _failed = false;
+        }
+        catch (Exception ex)
+        {
+            Logger.LogError(ex, "Kunne ikke gemme henvendelse fra {Company}", Model.Company);
+            _failed = true;
+        }
+    }
+}

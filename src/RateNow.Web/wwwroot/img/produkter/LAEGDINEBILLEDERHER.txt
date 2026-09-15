@@ -1,0 +1,6 @@
+Laeg produktfotos i denne mappe.
+
+Brug dem derefter i en Razor-fil med f.eks.:
+    <img src="img/produkter/stander.jpg" alt="NFC-stander paa en cafedisk" />
+
+Anbefaling: JPG eller WebP, maks ca. 1600 px bred, under 300 KB pr. billede.

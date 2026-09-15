@@ -1,0 +1,21 @@
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
+        <FocusOnNavigate RouteData="routeData" Selector="h1" />
+    </Found>
+    <NotFound>
+        <LayoutView Layout="typeof(Layout.MainLayout)">
+            <PageTitle>Siden findes ikke</PageTitle>
+            <PageHead Title="Den side kunne vi ikke finde"
+                      Lead="Måske er linket gammelt, eller også har vi flyttet noget. Prøv menuen foroven." />
+            <section class="section">
+                <div class="container">
+                    <div class="btn-row">
+                        <a class="btn btn--primary" href="/">Tilbage til forsiden</a>
+                        <a class="btn btn--outline" href="kontakt">Skriv til os</a>
+                    </div>
+                </div>
+            </section>
+        </LayoutView>
+    </NotFound>
+</Router>
