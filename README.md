@@ -21,7 +21,7 @@ dotnet watch --project src/RateNow.Web
 
 | Hvad | Hvor |
 | --- | --- |
-| E-mail, telefon, CVR, adresse, åbningstider | `src/RateNow.Web/appsettings.json` → sektionen `Site` |
+| E-mail, telefon, CVR, adresse, åbningstider | `src/RateNow.Web/appsettings.json` → sektionen `Site` (tomt telefon- eller CVR-felt skjules på siden) |
 | Priser | `src/RateNow.Web/Services/SiteContent.cs` → `Products` |
 | Produktnavne og beskrivelser | samme fil, `Products` |
 | Spørgsmål og svar | samme fil, `Faq` |

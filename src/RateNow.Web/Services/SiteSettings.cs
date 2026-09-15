@@ -10,8 +10,12 @@ public sealed class SiteSettings
 
     public string CompanyName { get; set; } = "RateNOW";
     public string LegalName { get; set; } = "RateNOW";
-    public string Email { get; set; } = "kontakt@ratenow.dk";
-    public string Phone { get; set; } = "+45 00 00 00 00";
+    public string Email { get; set; } = "ratenow00@gmail.com";
+    /// <summary>
+    /// Telefonnummer. Står feltet tomt, vises telefonnummeret ingen steder på siden.
+    /// </summary>
+    public string Phone { get; set; } = string.Empty;
+    public bool HasPhone => !string.IsNullOrWhiteSpace(Phone);
     public string PhoneHref => "tel:" + new string(Phone.Where(c => char.IsDigit(c) || c == '+').ToArray());
     /// <summary>
     /// CVR-nummer. Står feltet tomt, vises det ingen steder på siden.

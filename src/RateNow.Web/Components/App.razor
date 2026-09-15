@@ -44,7 +44,7 @@
             ["description"] = "Leverandør af NFC-kort, standere og klistermærker, "
                               + "der gør det nemt for kunder at anmelde en virksomhed.",
             ["email"] = Site.Value.Email,
-            ["telephone"] = Site.Value.Phone,
+            ["telephone"] = Site.Value.HasPhone ? Site.Value.Phone : null,
             ["areaServed"] = "DK"
-        });
+        }.Where(field => field.Value is not null).ToDictionary());
 }

@@ -14,8 +14,8 @@
         <h2>Sælger</h2>
         <p>
             @Identitet.
-            E-mail <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>,
-            telefon <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a>.
+            E-mail <a href="mailto:@Site.Value.Email">@Site.Value.Email</a>@if (Site.Value.HasPhone)
+            {<text>, telefon <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></text>}.
         </p>
 
         <h2>Priser</h2>

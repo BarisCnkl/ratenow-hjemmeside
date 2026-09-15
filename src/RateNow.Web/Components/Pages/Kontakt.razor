@@ -21,10 +21,13 @@
                         <strong>Tak — vi har modtaget din besked.</strong><br />
                         @Site.Value.ResponsePromise
                     </div>
-                    <p>
-                        Haster det, må du meget gerne ringe direkte på
-                        <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a>.
-                    </p>
+                    @if (Site.Value.HasPhone)
+                    {
+                        <p>
+                            Haster det, må du meget gerne ringe direkte på
+                            <a href="@Site.Value.PhoneHref">@Site.Value.Phone</a>.
+                        </p>
+                    }
                     <div class="btn-row" style="margin-top:20px">
                         <a class="btn btn--outline" href="produkter">Kig videre på produkterne</a>
                     </div>
@@ -127,10 +130,13 @@
                     <Icon Name="mail" Size="20" />
                     <span><strong>E-mail</strong><a href="mailto:@Site.Value.Email">@Site.Value.Email</a></span>
                 </div>
-                <div class="contact-line">
-                    <Icon Name="phone" Size="20" />
-                    <span><strong>Telefon</strong><a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></span>
-                </div>
+                @if (Site.Value.HasPhone)
+                {
+                    <div class="contact-line">
+                        <Icon Name="phone" Size="20" />
+                        <span><strong>Telefon</strong><a href="@Site.Value.PhoneHref">@Site.Value.Phone</a></span>
+                    </div>
+                }
                 <div class="contact-line">
                     <Icon Name="clock" Size="20" />
                     <span><strong>Træffetid</strong>@Site.Value.OpeningHours</span>

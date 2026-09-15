@@ -123,7 +123,7 @@ public static class SiteContent
             "Anmeldelserne ligger på Google og Trustpilot — hos jer. Vi er bare vejen derhen. Holder I op med at bruge os, står de der stadig."),
 
         new ValueProp("help", "Vi sætter det op for dig",
-            "Du behøver ikke være teknisk. Send os en mail eller ring, så klarer vi opsætningen, inden produktet forlader os."),
+            "Du behøver ikke være teknisk. Send os en mail, så klarer vi opsætningen, inden produktet forlader os."),
 
         new ValueProp("honest", "Vi siger det, som det er",
             "Hvis vi ikke tror, det giver mening for jeres forretning, siger vi det. Det er billigere for os begge end en skuffet kunde.")
@@ -175,7 +175,7 @@ public static class SiteContent
             "Regler"),
 
         new FaqItem("Kan vi mødes med jer, før vi beslutter os?",
-            "Ja, gerne. Skriv eller ring, så aftaler vi et tidspunkt, hvor vi kommer ud og sætter os ned med jer. " +
+            "Ja, gerne. Skriv til os, så aftaler vi et tidspunkt, hvor vi kommer ud og sætter os ned med jer. " +
             "Vi tager produkterne med, fortæller om dem og svarer på det, I er i tvivl om — også hvis I bare vil " +
             "høre mere og ikke er i nærheden af at købe noget. Et møde koster ingenting og forpligter jer ikke.",
             "Møde og levering"),
